@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bpnw2upvb5l7a"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_l7df8"]
+[ext_resource type="Material" uid="uid://hi3klfhqf03l" path="res://materials/player.tres" id="3_b1h2t"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_msxi1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fyc1r"]
+
+[node name="PlayerBody" type="AnimatableBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 24)
+script = ExtResource("1_l7df8")
+
+[node name="PlayerMesh" type="MeshInstance3D" parent="."]
+material_override = ExtResource("3_b1h2t")
+mesh = SubResource("BoxMesh_msxi1")
+skeleton = NodePath("../..")
+
+[node name="PlayerShape" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_fyc1r")
+
+[node name="PlayerFirePoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -1.5)
+
+[node name="PlayerLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+font_size = 128
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 2, 6)

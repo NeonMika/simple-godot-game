@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://bi58j63wy464l"]
+
+[ext_resource type="Script" path="res://scripts/projectile.gd" id="1_4mv8u"]
+[ext_resource type="Material" uid="uid://hxwmxn0suc0e" path="res://materials/projectile.tres" id="2_bkaap"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_jvcp2"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wmfh1"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ibcmi"]
+
+[node name="ProjectileBody" type="RigidBody3D"]
+collision_layer = 4
+script = ExtResource("1_4mv8u")
+
+[node name="ProjectileMesh" type="MeshInstance3D" parent="."]
+material_override = ExtResource("2_bkaap")
+mesh = SubResource("SphereMesh_jvcp2")
+
+[node name="ProjectileShape" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_wmfh1")
+
+[node name="DetectionArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="DetectionShape" type="CollisionShape3D" parent="DetectionArea"]
+shape = SubResource("SphereShape3D_ibcmi")
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
